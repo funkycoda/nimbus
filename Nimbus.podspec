@@ -1,199 +1,116 @@
-{
-  "name": "Nimbus",
-  "version": "1.2.1.1",
-  "license": "Apache License, Version 2.0",
-  "summary": "An iOS framework whose growth is bounded by O(documentation).",
-  "homepage": "http://nimbuskit.info",
-  "documentation_url": "http://latest.docs.nimbuskit.info",
-  "authors": {
-    "Jeff Verkoeyen": "jverkoey@gmail.com",
-    "Bubnov Slavik": "bubnovslavik@gmail.com",
-    "Roger Chapman": "rogchap@gmail.com",
-    "Manu Cornet": "manu.cornet@gmail.com",
-    "Glenn Grant": "glenn@ensquared.net",
-    "Aviel Lazar": "aviellazar@gmail.com",
-    "Benedikt Meurer": "benedikt.meurer@googlemail.com",
-    "Anderson Miller": "anderson@submarinerich.com",
-    "Basil Shkara": "basil@neat.io",
-    "Peter Steinberger": "me@petersteinberger.com",
-    "Hwee-Boon Yar": "hboon@motionobj.com"
-  },
-  "source": {
-    "git": "https://github.com/funkycoda/nimbus.git",
-    "tag": "1.2.1.1"
-  },
-  "description": "Nimbus is an iOS framework whose feature set grows only as fast as its documentation. By focusing on documentation first and features second, Nimbus hopes to be a framework that accelerates the development process of any application by being easy to use and simple to understand.",
-  "platforms": {
-    "ios": "6.0"
-  },
-  "requires_arc": true,
-  "subspecs": [
-    {
-      "name": "Core",
-      "source_files": "src/core/src"
-    },
-    {
-      "name": "Textfield",
-      "source_files": "src/textfield/src",
-      "dependencies": {
-        "Nimbus/Core": [
+Pod::Spec.new do |s|
+  s.name     = 'Nimbus'
+  s.version  = '1.2.1.1'
+  s.license  = 'Apache License, Version 2.0'
+  s.summary  = 'An iOS framework whose growth is bounded by O(documentation).'
+  s.homepage = 'http://docs.nimbuskit.info/index.html'
+  s.author   = { 'Jeff Verkoeyen'    => 'jverkoey@gmail.com',
+                 'Bubnov Slavik'     => 'bubnovslavik@gmail.com',
+                 'Roger Chapman'     => 'rogchap@gmail.com',
+                 'Manu Cornet'       => 'manu.cornet@gmail.com',
+                 'Glenn Grant'       => 'glenn@ensquared.net',
+                 'Aviel Lazar'       => 'aviellazar@gmail.com',
+                 'Benedikt Meurer'   => 'benedikt.meurer@googlemail.com',
+                 'Anderson Miller'   => 'anderson@submarinerich.com',
+                 'Basil Shkara'      => 'basil@neat.io',
+                 'Peter Steinberger' => 'me@petersteinberger.com',
+                 'Hwee-Boon Yar'     => 'hboon@motionobj.com' }
 
-        ]
-      }
-    },
-    {
-      "name": "Badge",
-      "source_files": "src/badge/src",
-      "dependencies": {
-        "Nimbus/Core": [
+  s.source   = { :git => 'https://github.com/funkycoda/nimbus.git', :tag => s.version.to_s }
 
-        ]
-      }
-    },
-    {
-      "name": "Collections",
-      "source_files": "src/collections/src",
-      "dependencies": {
-        "Nimbus/Core": [
+  s.description = 'Nimbus is an iOS framework whose feature set grows only as fast as its documentation. '  \
+                  'By focusing on documentation first and features second, Nimbus hopes to be a framework ' \
+                  'that accelerates the development process of any application by being easy to use and '   \
+                  'simple to understand.'
 
-        ]
-      }
-    },
-    {
-      "name": "CSS",
-      "source_files": "src/css/src",
-      "dependencies": {
-        "Nimbus/Core": [
+  s.platform = :ios, '6.0'
 
-        ],
-        "Nimbus/Textfield": [
+  s.requires_arc = true
 
-        ],
-        "AFNetworking": [
-          "~> 2.1"
-        ]
-      },
-      "frameworks": "CoreGraphics"
-    },
-    {
-      "name": "AttributedLabel",
-      "source_files": "src/attributedlabel/src",
-      "frameworks": [
-        "CoreText",
-        "CoreGraphics"
-      ],
-      "dependencies": {
-        "Nimbus/Core": [
+  s.subspec 'Core' do |core|    
+    core.source_files = 'src/core/src'
+  end
+  
+  s.subspec 'NetworkImage' do |image|
+    image.source_files = 'src/networkimage/src'
+    image.dependency 'Nimbus/Core'
+    image.dependency 'AFNetworking', '~> 2.1'
+  end
 
-        ]
-      }
-    },
-    {
-      "name": "Interapp",
-      "source_files": "src/interapp/src",
-      "dependencies": {
-        "Nimbus/Core": [
+  s.subspec 'Textfield' do |textfield|
+    textfield.source_files = 'src/textfield/src'
+    textfield.dependency 'Nimbus/Core'
+  end
 
-        ]
-      },
-      "frameworks": "CoreLocation"
-    },
-    {
-      "name": "Launcher",
-      "source_files": "src/launcher/src",
-      "dependencies": {
-        "Nimbus/Core": [
+  s.subspec 'Badge' do |badge|
+    badge.source_files = 'src/badge/src'
+    badge.dependency 'Nimbus/Core'
+  end
 
-        ],
-        "Nimbus/PagingScrollView": [
+  s.subspec 'Collections' do |collections|
+    collections.source_files = 'src/collections/src'
+    collections.dependency 'Nimbus/Core'
+  end
 
-        ]
-      },
-      "frameworks": "CoreGraphics"
-    },
-    {
-      "name": "Models",
-      "source_files": "src/models/src",
-      "dependencies": {
-        "Nimbus/Core": [
+  s.subspec 'CSS' do |css|
+    css.source_files = 'src/css/src'
+    css.dependency 'Nimbus/Core'
+    css.dependency 'Nimbus/Textfield'
+    css.dependency 'AFNetworking', '~> 2.1'
+    css.frameworks = 'CoreGraphics'
+  end
 
-        ]
-      }
-    },
-    {
-      "name": "Collections",
-      "source_files": "src/collections/src",
-      "dependencies": {
-        "Nimbus/Core": [
+  s.subspec 'AttributedLabel' do |label|
+    label.source_files = 'src/attributedlabel/src'
+    label.frameworks = 'CoreText','CoreGraphics'
+    label.dependency 'Nimbus/Core'
+  end
 
-        ]
-      }
-    },
-    {
-      "name": "NetworkControllers",
-      "source_files": "src/networkcontrollers/src",
-      "dependencies": {
-        "Nimbus/Core": [
+  s.subspec 'Interapp' do |interapp|
+    interapp.source_files = 'src/interapp/src'
+    interapp.dependency 'Nimbus/Core'
+    interapp.frameworks = 'CoreLocation'
+  end
 
-        ]
-      }
-    },
-    {
-      "name": "NetworkImage",
-      "source_files": "src/networkimage/src",
-      "dependencies": {
-        "Nimbus/Core": [
+  s.subspec 'Launcher' do |launcher|
+    launcher.source_files = 'src/launcher/src'
+    launcher.dependency 'Nimbus/Core'
+    launcher.dependency 'Nimbus/PagingScrollView'
+    launcher.frameworks = 'CoreGraphics'
+  end
 
-        ],
-        "AFNetworking": [
-          "~> 2.1"
-        ]
-      }
-    },
-    {
-      "name": "Overview",
-      "source_files": "src/overview/src",
-      "resources": "src/overview/resources/NimbusOverviewer.bundle",
-      "dependencies": {
-        "Nimbus/Core": [
+  s.subspec 'Models' do |models|
+    models.source_files = 'src/models/src'
+    models.dependency 'Nimbus/Core'
+  end
 
-        ],
-        "Nimbus/Models": [
+  s.subspec 'NetworkControllers' do |controllers|
+    controllers.source_files = 'src/networkcontrollers/src'
+    controllers.dependency 'Nimbus/Core'
+  end
 
-        ]
-      }
-    },
-    {
-      "name": "PagingScrollView",
-      "source_files": "src/pagingscrollview/src",
-      "dependencies": {
-        "Nimbus/Core": [
+  s.subspec 'Overview' do |overview|
+    overview.source_files = 'src/overview/src'
+    overview.resource     = 'src/overview/resources/NimbusOverviewer.bundle'
+    overview.dependency 'Nimbus/Core'
+    overview.dependency 'Nimbus/Models'
+  end
 
-        ]
-      }
-    },
-    {
-      "name": "Photos",
-      "source_files": "src/photos/src",
-      "resources": "src/photos/resources/NimbusPhotos.bundle",
-      "dependencies": {
-        "Nimbus/Core": [
+  s.subspec 'PagingScrollView' do |psv|
+    psv.source_files = 'src/pagingscrollview/src'
+    psv.dependency 'Nimbus/Core'
+  end
 
-        ],
-        "Nimbus/PagingScrollView": [
+  s.subspec 'Photos' do |photos|
+    photos.source_files = 'src/photos/src'
+    photos.resource     = 'src/photos/resources/NimbusPhotos.bundle'
+    photos.dependency 'Nimbus/Core'
+    photos.dependency 'Nimbus/PagingScrollView'
+  end
 
-        ]
-      }
-    },
-    {
-      "name": "WebController",
-      "source_files": "src/webcontroller/src",
-      "resources": "src/webcontroller/resources/NimbusWebController.bundle",
-      "dependencies": {
-        "Nimbus/Core": [
-
-        ]
-      }
-    }
-  ]
-}
+  s.subspec 'WebController' do |web_controller|
+    web_controller.source_files = 'src/webcontroller/src'
+    web_controller.resource     = 'src/webcontroller/resources/NimbusWebController.bundle'
+    web_controller.dependency 'Nimbus/Core'
+  end
+end
